@@ -60,7 +60,7 @@ public class Servidor {
                         intento.nErrores++;
                     }
                     transfer.sendIntento(intento);
-                }while(intento.nErrores<4 && !intento.adivinado.equals(palabras.get(palabra).getPalabra()));
+                }while(intento.nErrores<3 && !intento.adivinado.equals(palabras.get(palabra).getPalabra()));
             }
         }
         catch(Exception e){
