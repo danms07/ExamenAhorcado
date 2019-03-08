@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import static java.lang.System.exit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
+import static utils.Codes.REQUEST_CLOSE;
 import utils.Intento;
 
 /**
@@ -107,6 +109,12 @@ public class Game extends JFrame{
                 
         setVisible(true);
         
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
+        
         inten.addKeyListener(new KeyListener() {
 
             @Override
@@ -132,7 +140,7 @@ public class Game extends JFrame{
         bot1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){ 
                 if(!inten.getText().isEmpty()){
-                    cli.intento.intento=inten.getText().charAt(0);
+                    cli.intento.intento=inten.getText().toLowerCase().charAt(0);
                     clien = cli;
                     realizarIntento();
                     
@@ -210,4 +218,10 @@ public class Game extends JFrame{
             }
         }
     }
+    
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {                                   
+        clien.intento.nErrores = 4;
+        clien.transfer.sendIntento(clien.intento);
+        clien.intento = clien.transfer.getIntento();
+    } 
 }

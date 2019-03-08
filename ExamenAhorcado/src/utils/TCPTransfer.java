@@ -83,6 +83,20 @@ public class TCPTransfer{
           return null;
       }
     }
+
+    public Words getWord(Conexion con) {
+        try{
+            oos.writeObject(con);
+            return (Words)ois.readObject();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+            return null;
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+              return null;
+      }
+    }
 }
 
 

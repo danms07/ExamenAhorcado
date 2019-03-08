@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author dany
  */
 public class Words implements Serializable{
-    transient String palabra;
+    String palabra;
     String adivinado="";
     int idPalabra;
 
